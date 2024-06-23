@@ -1,7 +1,7 @@
 #include "LEDA/graphics/graphwin.h"
 #include "LEDA/core/list.h"
 
-#include "SUGIPROJ/step.h"
+#include "SUGIPROJ/steps/step.h"
 
 
 namespace sugi {

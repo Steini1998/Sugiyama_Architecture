@@ -1,8 +1,9 @@
 #include <LEDA/graphics/graphwin.h>
 
 #include "SUGIPROJ/sugiyama.h"
-#include "SUGIPROJ/step.h"
-#include "SUGIPROJ/leveling.h"
+#include "SUGIPROJ/steps/step.h"
+#include "SUGIPROJ/steps/leveling.h"
+#include "SUGIPROJ/steps/cycle_breaking.h"
 
 int main() {
     leda::GraphWin gw {};
@@ -10,7 +11,7 @@ int main() {
 
 	while (gw.edit()) {
 		sugi::sugiyama sg {gw};    
-        sg.add(new sugi::leveling{});
+        sg.add(new sugi::cycle_breaking{});
         sg.add(new sugi::leveling{});
         sg.run();
 	}
