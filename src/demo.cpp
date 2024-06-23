@@ -1,4 +1,4 @@
-#include <LEDA/graphics/graphwin.h>
+#include "LEDA/graphics/graphwin.h"
 
 #include "SUGIPROJ/sugiyama.h"
 #include "SUGIPROJ/steps/step.h"

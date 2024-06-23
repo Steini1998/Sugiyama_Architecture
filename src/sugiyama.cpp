@@ -1,4 +1,6 @@
 #include "LEDA/graph/graph.h"
+#include "LEDA/graphics/panel.h"
+
 #include "SUGIPROJ/sugiyama.h"
 
 using namespace sugi;
@@ -15,8 +17,26 @@ void sugiyama::remove(step* s) {
 void sugiyama::run() {
 	m_current_graph = m_initial_graph;
 	m_current_step_item = m_steps.first();
-	this->process();
-	this->process();
+
+	leda::panel steps_process_panel("Steps");
+	steps_process_panel.button("Stop", 0);
+	steps_process_panel.button("Process", 1);
+	steps_process_panel.button("Unprocess", 2);
+	bool still_active = true;
+
+	while (still_active) {
+		switch (m_graphwin.open_panel(steps_process_panel)) {
+			case 0: 
+				still_active = false;
+				break;
+			case 1:
+				this->process();
+				break;
+			case 2:
+				this->unprocess();
+				break;
+		}
+	}
 }
 
 void sugiyama::process() {
@@ -24,11 +44,11 @@ void sugiyama::process() {
 	step_to_be_executed->setGraph(m_current_graph);
 	step_to_be_executed->go();
 	m_current_graph = step_to_be_executed->getGraph();
-	moveStepForward();
+	this->moveStepForward();
 }
 
 void sugiyama::unprocess() {
-	moveStepBackward();
+	this->moveStepBackward();
 }
 
 sugi::step* sugiyama::getCurrentStep() const {
