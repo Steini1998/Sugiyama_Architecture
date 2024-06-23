@@ -5,12 +5,12 @@
 namespace sugi {
     
     class leveling : public sugi::step {
-    private:
-
     public:
         leveling() = default;
-        
+
         void go() override;
+
+    private:
         
     };
 

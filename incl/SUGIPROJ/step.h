@@ -5,10 +5,7 @@
 
 namespace sugi {
 	
-	class step {
-	protected:
-		leda::graph m_graph;
-		
+	class step {		
 	public:
 		step() = default;
 
@@ -21,6 +18,9 @@ namespace sugi {
 		}
 
 		virtual void go() = 0;
+
+	private:
+		leda::graph m_graph;
 
 	};
 	

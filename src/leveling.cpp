@@ -6,5 +6,5 @@ using namespace sugi;
 
 
 void leveling::go() {
-    std::cout << m_graph.number_of_nodes();
+    std::cout << m_graph.number_of_nodes() << std::endl;
 }
