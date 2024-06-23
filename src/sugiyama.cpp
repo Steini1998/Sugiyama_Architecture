@@ -4,6 +4,18 @@
 using namespace sugi;
 
 
+void sugiyama::process() {
+	leda::graph current_graph = this->getCurrentGraph();
+	s->setGraph(current_graph);
+	s->go();
+	m_current_step++;
+}
+
+void sugiyama::unprocess() {
+	m_current_step--;
+}
+
+
 void sugiyama::add(step* s) {
 	m_steps.push(s);
 }
@@ -13,10 +25,18 @@ void sugiyama::remove(step* s) {
 }
 
 void sugiyama::run() {
-	leda::graph current_graph { m_graphwin.get_graph() };
-	for (step* s : m_steps) {
-		s->setGraph(current_graph);
-		s->go();
-		current_graph = s->getProcessedGraph();
+	m_current_step = 0;
+	bool should_continue = true;
+	while (should_continue) {
+		m_current_graph = (true) 
+							? this->process() 
+							: this->unprocess();		
 	}
+}
+
+leda::graph sugiyama::getCurrentGraph() const {
+	if (m_current_step == 0) 
+		return m_initial_graph;
+	
+	return m_steps.get_item(m_current_step - 1);
 }

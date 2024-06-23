@@ -9,6 +9,7 @@ namespace sugi {
 
     public:
         leveling() = default;
+        
         void go() override;
         
     };

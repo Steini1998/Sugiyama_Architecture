@@ -7,22 +7,17 @@ namespace sugi {
 	
 	class step {
 	protected:
-		leda::graph m_received_graph;
-		leda::graph m_processed_graph;
+		leda::graph m_graph;
 		
 	public:
 		step() = default;
 
+		leda::graph getGraph() const {
+			return m_graph;
+		}
+
 		void setGraph(leda::graph g) {
-			m_received_graph = g;
-		}
-
-		leda::graph getReceivedGraph() const {
-			return m_received_graph;
-		}
-
-		leda::graph getProcessedGraph() const {
-			return m_processed_graph;
+			m_graph = g;
 		}
 
 		virtual void go() = 0;
