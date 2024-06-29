@@ -13,21 +13,18 @@ sugiyama::sugiyama(leda::GraphWin& gw) : m_graphwin { gw } {
 	this->add(initial_step);
 }
 
+sugiyama::sugiyama(sugiyama& sg) : sugiyama::sugiyama { sg.getGraphWin() } {}
+
+leda::GraphWin& sugiyama::getGraphWin() const {
+	return m_graphwin;
+}
+
 void sugiyama::add(step* s) {
 	m_steps.push_back(s);
 }
 
 void sugiyama::remove(step* s) {
 	m_steps.remove(s);
-}
-
-void sugiyama::executeAll() {
-	leda::graph current_graph = m_steps.head()->getGraph();
-	for (step* s : m_steps) {
-		s->setGraph(current_graph);
-		s->run();
-		current_graph = s->getGraph();
-	}
 }
 
 void sugiyama::view() {
@@ -44,6 +41,7 @@ void sugiyama::view() {
 	bool still_active = true;
 
 	while (still_active) {
+		this->viewCurrentGraph();
 		switch (m_graphwin.open_panel(steps_process_panel)) {
 			case 0: 
 				still_active = false;
@@ -56,6 +54,20 @@ void sugiyama::view() {
 				break;
 		}
 	}
+}
+
+void sugiyama::executeAll() {
+	leda::graph current_graph = m_steps.head()->getGraph();
+	for (step* s : m_steps) {
+		s->setGraph(current_graph);
+		s->run();
+		current_graph = s->getGraph();
+	}
+}
+
+void sugiyama::viewCurrentGraph() {
+	leda::graph& current_graph = m_steps[m_current_step_item]->getGraph();
+	m_graphwin.set_graph(current_graph);
 }
 
 void sugiyama::moveStepBackward() {

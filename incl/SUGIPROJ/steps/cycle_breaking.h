@@ -8,7 +8,7 @@ namespace sugi {
     public:
         cycle_breaking() = default;
 
-        void go() override;
+        void run() override;
 
     private:
         
