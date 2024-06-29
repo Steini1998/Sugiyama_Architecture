@@ -13,8 +13,6 @@ sugiyama::sugiyama(leda::GraphWin& gw) : m_graphwin { gw } {
 	this->add(initial_step);
 }
 
-sugiyama::sugiyama(sugiyama& sg) : sugiyama::sugiyama { sg.getGraphWin() } {}
-
 leda::GraphWin& sugiyama::getGraphWin() const {
 	return m_graphwin;
 }

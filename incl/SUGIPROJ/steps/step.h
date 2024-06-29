@@ -1,23 +1,12 @@
 #pragma once
 
-#include <LEDA/graph/graph.h>
-
-#include "SUGIPROJ/sugiyama.h"
+#include "LEDA/graph/graph.h"
 
 
 namespace sugi {
 	
 	class step {		
 	public:
-		step() = default;
-
-		sugiyama& getSugiyama() const {
-			return m_sugiyama;
-		}
-
-		void setSugiyama(sugiyama& sg) {
-			m_sugiyama = sg;
-		}
 
 		leda::graph getGraph() const {
 			return m_graph;
@@ -30,8 +19,6 @@ namespace sugi {
 		virtual void run() = 0;
 
 	private:
-		sugiyama& m_sugiyama;
-
 		leda::graph m_graph;
 
 	};

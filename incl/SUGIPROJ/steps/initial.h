@@ -6,7 +6,6 @@ namespace sugi {
     
     class initial : public sugi::step {
     public:
-        initial() = default;
 
         void run() override;
 

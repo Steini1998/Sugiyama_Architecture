@@ -11,7 +11,6 @@ namespace sugi {
 	class sugiyama {		
 	public:
 		sugiyama(leda::GraphWin&);
-		sugiyama(sugiyama&);
 
 		leda::GraphWin& getGraphWin() const;
 
