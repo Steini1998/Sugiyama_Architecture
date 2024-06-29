@@ -17,7 +17,7 @@ namespace sugi {
 			m_graph = g;
 		}
 
-		virtual void go() = 0;
+		virtual void run() = 0;
 
 	private:
 		leda::graph m_graph;

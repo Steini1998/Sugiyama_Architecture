@@ -5,7 +5,7 @@
 using namespace sugi;
 
 
-void cycle_breaking::go() {
+void cycle_breaking::run() {
     std::cout << "Kara" << std::endl;
     std::cout << this->getGraph().number_of_edges() << std::endl;
 }

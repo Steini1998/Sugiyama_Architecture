@@ -4,11 +4,11 @@
 
 namespace sugi {
     
-    class leveling : public sugi::step {
+    class initial : public sugi::step {
     public:
-        leveling() = default;
+        initial() = default;
 
-        void go() override;
+        void run() override;
 
     private:
         
