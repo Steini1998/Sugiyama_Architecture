@@ -1,13 +1,14 @@
 #include <iostream>
 
+#include "LEDA/graphics/graphwin.h"
 #include "LEDA/geo/point.h"
 
 #include "SUGIPROJ/steps/initial.h"
+#include "SUGIPROJ/sugiyama.h"
 
 using namespace sugi;
 
 
 void initial::run() {
-    std::cout << "oke" << std::endl;
-    std::cout << this->getGraph().number_of_nodes() << std::endl;
+    std::cout << "Initial Graph, so nothing to be done." << std::endl;
 }

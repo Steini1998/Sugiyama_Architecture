@@ -1,15 +1,15 @@
 #include "LEDA/graph/graph.h"
 #include "LEDA/graphics/panel.h"
 
-#include "SUGIPROJ/sugiyama.h"
 #include "SUGIPROJ/steps/initial.h"
+#include "SUGIPROJ/sugiyama.h"
+
 
 using namespace sugi;
 
 
 sugiyama::sugiyama(leda::GraphWin& gw) : m_graphwin { gw } {
-	step* initial_step = new initial {};
-	initial_step->setGraph(gw.get_graph());
+	step* initial_step = new initial {}; 
 	this->add(initial_step);
 }
 
@@ -18,6 +18,7 @@ leda::GraphWin& sugiyama::getGraphWin() const {
 }
 
 void sugiyama::add(step* s) {
+	s->setSugiyama(this);
 	m_steps.push_back(s);
 }
 
@@ -31,6 +32,7 @@ void sugiyama::view() {
 	
 	m_current_step_item = m_steps.first();
 
+	// Input needs to be separated from sugiyama-class.
 	leda::panel steps_process_panel("Steps");
 	steps_process_panel.button("Stop", 0);
 	steps_process_panel.button("Move Step Forward", 1);
@@ -55,7 +57,7 @@ void sugiyama::view() {
 }
 
 void sugiyama::executeAll() {
-	leda::graph current_graph = m_steps.head()->getGraph();
+	leda::graph current_graph = m_graphwin.get_graph();
 	for (step* s : m_steps) {
 		s->setGraph(current_graph);
 		s->run();
@@ -66,6 +68,7 @@ void sugiyama::executeAll() {
 void sugiyama::viewCurrentGraph() {
 	leda::graph& current_graph = m_steps[m_current_step_item]->getGraph();
 	m_graphwin.set_graph(current_graph);
+	m_graphwin.update_graph();
 }
 
 void sugiyama::moveStepBackward() {

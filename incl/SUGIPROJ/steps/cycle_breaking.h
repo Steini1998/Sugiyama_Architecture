@@ -4,7 +4,7 @@
 
 namespace sugi {
     
-    class cycle_breaking : public sugi::step {
+    class cycle_breaking : public step {
     public:
 
         void run() override;

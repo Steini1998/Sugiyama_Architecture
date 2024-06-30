@@ -4,7 +4,7 @@
 
 namespace sugi {
     
-    class initial : public sugi::step {
+    class initial : public step {
     public:
 
         void run() override;

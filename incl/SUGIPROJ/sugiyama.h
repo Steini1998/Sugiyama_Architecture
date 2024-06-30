@@ -17,7 +17,7 @@ namespace sugi {
 		void add(step*);
 		void remove(step*);
 
-		void view(); // iterating over graphs
+		void view(); // call executeAll() and iterating over graphs
 
 	private:
 		leda::GraphWin& m_graphwin;
@@ -25,7 +25,7 @@ namespace sugi {
 		leda::list<step*> m_steps;
 		leda::list_item m_current_step_item;
 
-		void executeAll(); // runs all steps
+		void executeAll(); // runs all steps and creates all intermediate results
 
 		void viewCurrentGraph();
 
