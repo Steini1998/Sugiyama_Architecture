@@ -9,8 +9,7 @@ using namespace sugi;
 
 
 sugiyama::sugiyama(leda::GraphWin& gw) : m_graphwin { gw } {
-	step* initial_step = new initial {}; 
-	this->add(initial_step);
+	this->add(new initial {});
 }
 
 leda::GraphWin& sugiyama::getGraphWin() const {
@@ -27,12 +26,18 @@ void sugiyama::remove(step* s) {
 }
 
 void sugiyama::view() {
-	// Running all steps. Each step saves its result graph.
+	// Running all steps. Each step saves its intermediate result graph.
 	this->executeAll();
+
+	/* std::cout << "Printing node numbers per step" << std::endl;
+
+	for (step* s : m_steps) {
+		std::cout << s->getGraph().number_of_nodes() << std::endl;
+	} */
 	
 	m_current_step_item = m_steps.first();
 
-	// Input needs to be separated from sugiyama-class.
+	// TODO: Input needs to be separated from sugiyama-class.
 	leda::panel steps_process_panel("Steps");
 	steps_process_panel.button("Stop", 0);
 	steps_process_panel.button("Move Step Forward", 1);
@@ -41,10 +46,11 @@ void sugiyama::view() {
 	bool still_active = true;
 
 	while (still_active) {
-		this->viewCurrentGraph();
+		// this->viewCurrentGraph();
 		switch (m_graphwin.open_panel(steps_process_panel)) {
 			case 0: 
 				still_active = false;
+				m_current_step_item = m_steps.first();
 				break;
 			case 1:
 				this->moveStepForward();
@@ -53,6 +59,7 @@ void sugiyama::view() {
 				this->moveStepBackward();
 				break;
 		}
+		this->viewCurrentGraph();
 	}
 }
 

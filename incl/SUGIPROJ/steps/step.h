@@ -14,7 +14,7 @@ namespace sugi {
 			m_sugiyama = sg;
 		} 
 
-		leda::graph getGraph() const {
+		leda::graph& getGraph() {
 			return m_graph;
 		}
 
