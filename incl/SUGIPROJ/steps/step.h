@@ -1,6 +1,7 @@
 #pragma once
 
 #include "LEDA/graph/graph.h"
+#include "LEDA/geo/point.h"
 
 
 namespace sugi {
@@ -10,17 +11,13 @@ namespace sugi {
 	class step {		
 	public:
 
-		void setSugiyama(sugiyama* sg) {
-			m_sugiyama = sg;
-		} 
+		void setSugiyama(sugiyama*);
 
-		leda::graph& getGraph() {
-			return m_graph;
-		}
+		leda::graph& getGraph();
 
-		void setGraph(leda::graph g) {
-			m_graph = g;
-		}
+		void setGraph(leda::graph);
+
+		leda::node_array<leda::point>& getPositions();
 
 		virtual void run() = 0;
 
@@ -29,6 +26,9 @@ namespace sugi {
 
 	private:
 		leda::graph m_graph;
+		leda::node_array<leda::point> m_positions;
+
+		void setPositions();
 
 	};
 	

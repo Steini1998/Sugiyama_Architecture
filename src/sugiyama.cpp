@@ -1,15 +1,15 @@
 #include "LEDA/graph/graph.h"
 #include "LEDA/graphics/panel.h"
 
-#include "SUGIPROJ/steps/initial.h"
+#include "SUGIPROJ/steps/input.h"
 #include "SUGIPROJ/sugiyama.h"
 
 
 using namespace sugi;
 
 
-sugiyama::sugiyama(leda::GraphWin& gw) : m_graphwin { gw } {
-	this->add(new initial {});
+sugiyama::sugiyama(leda::GraphWin& gw) : m_graphwin{gw} {
+	this->add(new input{});
 }
 
 leda::GraphWin& sugiyama::getGraphWin() const {
@@ -28,12 +28,6 @@ void sugiyama::remove(step* s) {
 void sugiyama::view() {
 	// Running all steps. Each step saves its intermediate result graph.
 	this->executeAll();
-
-	/* std::cout << "Printing node numbers per step" << std::endl;
-
-	for (step* s : m_steps) {
-		std::cout << s->getGraph().number_of_nodes() << std::endl;
-	} */
 	
 	m_current_step_item = m_steps.first();
 
@@ -46,7 +40,6 @@ void sugiyama::view() {
 	bool still_active = true;
 
 	while (still_active) {
-		// this->viewCurrentGraph();
 		switch (m_graphwin.open_panel(steps_process_panel)) {
 			case 0: 
 				still_active = false;
@@ -73,8 +66,10 @@ void sugiyama::executeAll() {
 }
 
 void sugiyama::viewCurrentGraph() {
-	leda::graph& current_graph = m_steps[m_current_step_item]->getGraph();
-	m_graphwin.set_graph(current_graph);
+	step* current_step = m_steps[m_current_step_item];
+	// leda::graph& current_graph = m_steps[m_current_step_item]->getGraph();
+	m_graphwin.set_graph(current_step->getGraph());
+	// m_graphwin.set_position(current_step->getPositions());
 	m_graphwin.update_graph();
 }
 
