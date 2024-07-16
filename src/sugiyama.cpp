@@ -1,9 +1,8 @@
 #include "LEDA/graph/graph.h"
 #include "LEDA/graphics/panel.h"
 
-#include "SUGIPROJ/steps/input.h"
 #include "SUGIPROJ/sugiyama.h"
-
+#include "SUGIPROJ/steps/input.h"
 
 using namespace sugi;
 
@@ -14,10 +13,11 @@ sugiyama::sugiyama(leda::GraphWin& gw) : m_graphwin{gw} {
 
 leda::GraphWin& sugiyama::getGraphWin() const {
 	return m_graphwin;
-}
+} 
 
 void sugiyama::add(step* s) {
 	s->setSugiyama(this);
+	s->setGraph(m_graphwin.get_graph());
 	m_steps.push_back(s);
 }
 
@@ -57,19 +57,22 @@ void sugiyama::view() {
 }
 
 void sugiyama::executeAll() {
-	leda::graph current_graph = m_graphwin.get_graph();
+	/* leda::graph current_graph = m_graphwin.get_graph();
+	leda::node_map<leda::point> current_positions = leda::node_map<leda::point>{current_graph};
+	m_graphwin.get_position(current_positions); */
 	for (step* s : m_steps) {
-		s->setGraph(current_graph);
+		/* s->setGraph(current_graph);
+		s->setPositions(current_positions); */
 		s->run();
-		current_graph = s->getGraph();
+		/* current_graph = s->getGraph();
+		current_positions = s->getPositions(); */
 	}
 }
 
 void sugiyama::viewCurrentGraph() {
 	step* current_step = m_steps[m_current_step_item];
-	// leda::graph& current_graph = m_steps[m_current_step_item]->getGraph();
 	m_graphwin.set_graph(current_step->getGraph());
-	// m_graphwin.set_position(current_step->getPositions());
+	m_graphwin.set_position(current_step->getPositions());
 	m_graphwin.update_graph();
 }
 

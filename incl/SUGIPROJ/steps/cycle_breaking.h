@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SUGIPROJ/steps/step.h"
+#include "SUGIPROJ/sugiyama.h"
 
 namespace sugi {
     
