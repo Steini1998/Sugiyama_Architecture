@@ -1,0 +1,8 @@
+.vscode
+bin
+docs/project_description
+docs/scripts
+incl/HELP
+incl/LEDA
+intermediates
+lib
