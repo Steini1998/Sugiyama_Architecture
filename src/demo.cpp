@@ -13,6 +13,8 @@ int main() {
 		sugi::sugiyama sg {gw};    
         sg.add(new sugi::cycle_breaking{});
         sg.add(new sugi::cycle_breaking{});
+
+        sg.process();
         sg.view();
 	}
     

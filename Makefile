@@ -5,12 +5,15 @@ all: bin/demo.exe
 	
 
 bin/demo.exe: intermediates/demo.obj intermediates/sugiyama.obj intermediates/step.obj intermediates/input.obj intermediates/cycle_breaking.obj
-	cl -nologo -MT  intermediates/demo.obj intermediates/sugiyama.obj intermediates/step.obj intermediates/input.obj intermediates/cycle_breaking.obj -Febin/demo.exe .\\lib\\leda.lib $(linking_libs)
+	cl -nologo -MT intermediates/demo.obj intermediates/sugiyama.obj intermediates/step.obj intermediates/input.obj intermediates/cycle_breaking.obj -Febin/demo.exe .\\lib\\leda.lib $(linking_libs)
 
 
 intermediates/%.obj: src/%.cpp
 	cl -nologo -W3 -c -Zm300 -TP -EHsc -Ox -MT  -I .\\incl $< -Fo$@
 
+intermediates/sugiyama.obj: incl/SUGIPROJ/sugiyama.h src/sugiyama.cpp incl/SUGIPROJ/steps/step.h src/step.cpp
+	cl -nologo -W3 -c -Zm300 -TP -EHsc -Ox -MT  -I .\\incl src/sugiyama.cpp -Fointermediates/sugiyama.obj
+	
 intermediates/step.obj: incl/SUGIPROJ/steps/step.h src/step.cpp
 	cl -nologo -W3 -c -Zm300 -TP -EHsc -Ox -MT  -I .\\incl src/step.cpp -Fointermediates/step.obj
 	

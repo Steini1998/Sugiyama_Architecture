@@ -7,17 +7,15 @@
 using namespace sugi;
 
 
-sugiyama::sugiyama(leda::GraphWin& gw) : m_graphwin{gw} {
-	this->add(new input{});
+sugiyama::sugiyama(leda::GraphWin& gw) 
+	: m_graphwin{gw}, m_graph{gw.get_graph()} {
+		m_positions = leda::node_map<leda::point>{m_graph};
+		m_graphwin.get_position(m_positions);
+		this->add(new input{});
 }
-
-leda::GraphWin& sugiyama::getGraphWin() const {
-	return m_graphwin;
-} 
 
 void sugiyama::add(step* s) {
 	s->setSugiyama(this);
-	s->setGraph(m_graphwin.get_graph());
 	m_steps.push_back(s);
 }
 
@@ -25,10 +23,13 @@ void sugiyama::remove(step* s) {
 	m_steps.remove(s);
 }
 
-void sugiyama::view() {
-	// Running all steps. Each step saves its intermediate result graph.
-	this->executeAll();
-	
+void sugiyama::process() {
+	for (step* s : m_steps) {
+		s->make();
+	}
+}
+
+void sugiyama::view() {	
 	m_current_step_item = m_steps.first();
 
 	// TODO: Input needs to be separated from sugiyama-class.
@@ -56,17 +57,12 @@ void sugiyama::view() {
 	}
 }
 
-void sugiyama::executeAll() {
-	/* leda::graph current_graph = m_graphwin.get_graph();
-	leda::node_map<leda::point> current_positions = leda::node_map<leda::point>{current_graph};
-	m_graphwin.get_position(current_positions); */
-	for (step* s : m_steps) {
-		/* s->setGraph(current_graph);
-		s->setPositions(current_positions); */
-		s->run();
-		/* current_graph = s->getGraph();
-		current_positions = s->getPositions(); */
-	}
+leda::graph& sugiyama::getGraph() {
+    return m_graph;
+}
+
+leda::node_map<leda::point>& sugiyama::getPositions() {
+    return m_positions;
 }
 
 void sugiyama::viewCurrentGraph() {

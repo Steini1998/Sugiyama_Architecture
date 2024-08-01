@@ -13,21 +13,24 @@ namespace sugi {
 
 		void setSugiyama(sugiyama*);
 
-		void setGraph(leda::graph);
+		leda::graph& getGraph();
 
-		leda::graph getGraph();
+		leda::node_array<leda::point>& getPositions();
 
-		leda::node_map<leda::point> getPositions();
-
-		void setPositions(leda::node_map<leda::point>);
+		void make(); // Template method
 
 		virtual void run() = 0;
+
+		void takeSnapshot();
 
 	protected:
 		sugiyama* m_sugiyama;
 
+		/* Copied Snapshots of the current (original) state. */
 		leda::graph m_graph;
-		leda::node_map<leda::point> m_positions;
+		leda::node_array<leda::point> m_positions;
+
+		leda::node_array<leda::point> mapPositions(const leda::graph&, const leda::graph&, const leda::node_map<leda::point>&);
 		
 	};
 	

@@ -12,25 +12,11 @@ using namespace sugi;
 void cycle_breaking::run() {
     std::cout << "Cycle-Breaking" << std::endl;
 
-    leda::node n = m_graph.new_node();
-    m_positions[n] = leda::point(5, 7);
+    leda::graph& g = m_sugiyama->getGraph();
+    leda::node_map<leda::point>& pos = m_sugiyama->getPositions();
+
+    leda::node n = g.new_node();
+    pos[n] = leda::point(50, 70);
 
     std::cout << m_graph.number_of_nodes() << std::endl;
-}
-
-
-leda::graph GreedyMakeAcyclic(leda::graph g) {
-	
-}
-
-
-int main() {
-	GraphWin gw {"Cycle-Breaking"};
-	gw.display();
-	
-	while (gw.edit()) {
-	
-	}
-	
-	return 0;
 }
