@@ -10,8 +10,6 @@ namespace sugi {
 	
 	class sugiyama {
 
-		// friend class step; // step-objects can access all fields and functions from connected sugiyama-object
-
 	public:
 		sugiyama(leda::GraphWin&);
 
@@ -21,6 +19,8 @@ namespace sugi {
 		void process(); // run all steps sequential
 		void view(); // iterate over intermediate solutions
 
+		leda::GraphWin& getGraphWin();
+		
 		leda::graph& getGraph();
 		leda::node_map<leda::point>& getPositions();
 

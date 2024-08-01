@@ -2,7 +2,7 @@
 
 using namespace sugi;
 
-void positionable_graph::takeSnaphshot(const leda::graph& g, const leda::node_map<leda::point>& pos) {
+void positionable_graph::takeSnapshot(const leda::graph& g, const leda::node_map<leda::point>& pos) {
 	m_graph = g;  // create copy from graph
 	m_positions = leda::node_array<leda::point>{m_graph};
 	mapPositions(g, pos);

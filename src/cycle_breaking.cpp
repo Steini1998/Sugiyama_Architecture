@@ -17,6 +17,4 @@ void cycle_breaking::run() {
 
     leda::node n = g.new_node();
     pos[n] = leda::point(50, 70);
-
-    std::cout << m_graph.number_of_nodes() << std::endl;
 }

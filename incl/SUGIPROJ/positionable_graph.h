@@ -12,7 +12,7 @@ namespace sugi {
 	public:
 		positionable_graph() = default;
 
-		void takeSnaphshot(const leda::graph&, const leda::node_map<leda::point>&);
+		void takeSnapshot(const leda::graph&, const leda::node_map<leda::point>&);
 
 		void show(leda::GraphWin&);
 

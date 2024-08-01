@@ -57,6 +57,10 @@ void sugiyama::view() {
 	}
 }
 
+leda::GraphWin& sugiyama::getGraphWin() {
+	return m_graphwin;
+}
+
 leda::graph& sugiyama::getGraph() {
     return m_graph;
 }
@@ -67,9 +71,7 @@ leda::node_map<leda::point>& sugiyama::getPositions() {
 
 void sugiyama::viewCurrentGraph() {
 	step* current_step = m_steps[m_current_step_item];
-	m_graphwin.set_graph(current_step->getGraph());
-	m_graphwin.set_position(current_step->getPositions());
-	m_graphwin.update_graph();
+	current_step->showResult();
 }
 
 void sugiyama::moveStepBackward() {
