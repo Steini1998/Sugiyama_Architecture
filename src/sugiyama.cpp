@@ -1,5 +1,4 @@
 #include "LEDA/graph/graph.h"
-#include "LEDA/graphics/panel.h"
 
 #include "SUGIPROJ/sugiyama.h"
 #include "SUGIPROJ/steps/input.h"
@@ -29,32 +28,10 @@ void sugiyama::process() {
 	}
 }
 
-void sugiyama::view() {	
-	m_current_step_item = m_steps.first();
-
-	// TODO: Input needs to be separated from sugiyama-class.
-	leda::panel steps_process_panel("Steps");
-	steps_process_panel.button("Stop", 0);
-	steps_process_panel.button("Move Step Forward", 1);
-	steps_process_panel.button("Move Step Backward", 2);
-
-	bool still_active = true;
-
-	while (still_active) {
-		switch (m_graphwin.open_panel(steps_process_panel)) {
-			case 0: 
-				still_active = false;
-				m_current_step_item = m_steps.first();
-				break;
-			case 1:
-				this->moveStepForward();
-				break;
-			case 2:
-				this->moveStepBackward();
-				break;
-		}
-		this->viewCurrentGraph();
-	}
+void sugiyama::show(ui* user_interface) {	
+	m_step_viewer.setSteps(m_steps);
+	m_step_viewer.setUserInterface(user_interface);
+	m_step_viewer.view();
 }
 
 leda::GraphWin& sugiyama::getGraphWin() {
@@ -69,23 +46,6 @@ leda::node_map<leda::point>& sugiyama::getPositions() {
     return m_positions;
 }
 
-void sugiyama::viewCurrentGraph() {
-	step* current_step = m_steps[m_current_step_item];
-	current_step->showResult();
-}
-
-void sugiyama::moveStepBackward() {
-	if (m_current_step_item == m_steps.first_item()) {
-		return;
-	}
-	m_current_step_item = m_current_step_item->get_pred();
-	return;
-}
-
-void sugiyama::moveStepForward() {
-	if (m_current_step_item == m_steps.last_item()) {
-		return;
-	}
-	m_current_step_item = m_current_step_item->get_succ();
-	return;
+void sugiyama::setStepViewer(const step_viewer& sv) {
+	m_step_viewer = sv;
 }

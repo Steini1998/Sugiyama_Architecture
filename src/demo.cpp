@@ -5,8 +5,13 @@
 #include "SUGIPROJ/sugiyama.h"
 #include "SUGIPROJ/steps/cycle_breaking.h"
 
+#include "SUGIPROJ/views/panel_ui.h"
+
+using namespace sugi;
+
 int main() {
     leda::GraphWin gw {"Sugiyama"};
+    panel_ui* pui = &panel_ui{gw};
     gw.display();
 
 	while (gw.edit()) {
@@ -15,7 +20,7 @@ int main() {
         sg.add(new sugi::cycle_breaking{});
 
         sg.process();
-        sg.view();
+        sg.show(pui);
 	}
     
     return 0;
