@@ -11,7 +11,7 @@ using namespace sugi;
 
 int main() {
     leda::GraphWin gw {"Sugiyama"};
-    panel_ui* pui = &panel_ui{gw};
+    ui* pui = new panel_ui{gw};
     gw.display();
 
 	while (gw.edit()) {

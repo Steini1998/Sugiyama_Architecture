@@ -13,7 +13,7 @@ int panel_ui::get() {
 }
 
 void panel_ui::configurePanel() {
-    m_panel.button("Move Step Backward", -1);
-	m_panel.button("Stop", 0);
-	m_panel.button("Move Step Forward", 1);
+    m_panel.button("Stop", 0);
+    m_panel.button("Move Step Backward", 1);
+	m_panel.button("Move Step Forward", 2);
 }

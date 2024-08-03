@@ -9,13 +9,13 @@ void step_viewer::view() {
     
     while (still_active) {
         switch (m_user_interface->get()) {
-            case -1:
-                moveStepBackward();
-                break;
             case 0:
                 still_active = false;
                 break;
             case 1:
+                moveStepBackward();
+                break;
+            case 2:
                 moveStepForward();
                 break;
         }
