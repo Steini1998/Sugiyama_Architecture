@@ -17,7 +17,7 @@ namespace sugi {
 		void remove(step*);
 
 		void process(); // run all steps sequential
-		void show(ui*); // iterate over intermediate solutions
+		void show(); // iterate over intermediate solutions
 
 		leda::GraphWin& getGraphWin();
 		

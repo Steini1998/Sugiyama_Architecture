@@ -28,9 +28,8 @@ void sugiyama::process() {
 	}
 }
 
-void sugiyama::show(ui* user_interface) {	
+void sugiyama::show() {	
 	m_step_viewer.setSteps(m_steps);
-	m_step_viewer.setUserInterface(user_interface);
 	m_step_viewer.view();
 }
 
