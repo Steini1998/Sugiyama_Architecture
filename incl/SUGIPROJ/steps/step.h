@@ -17,16 +17,17 @@ namespace sugi {
 
 		void make(); // Template method
 
-		virtual void run() = 0;
-
-		void saveResult();
-
 		void showResult();
 
 	protected:
 		sugiyama* m_sugiyama;
 
 		positionable_graph m_position_graph;
+		
+	private:
+		virtual void run() = 0;
+
+		void saveResult();
 		
 	};
 	
