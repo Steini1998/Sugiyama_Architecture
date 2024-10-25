@@ -3,6 +3,7 @@
 #include "LEDA/graphics/graphwin.h"
 
 #include "SUGIPROJ/sugiyama.h"
+#include "SUGIPROJ/steps/input.h"
 #include "SUGIPROJ/steps/cycle_breaking.h"
 
 #include "SUGIPROJ/views/step_viewer.h"
@@ -21,6 +22,8 @@ int main() {
 	while (gw.edit()) {
 		sugi::sugiyama sg {gw};
 		sg.setStepViewer(sv);
+		
+		sg.add(new sugi::input{});
         sg.add(new sugi::cycle_breaking{});
         sg.add(new sugi::cycle_breaking{});
 
