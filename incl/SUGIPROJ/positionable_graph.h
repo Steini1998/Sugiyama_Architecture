@@ -17,10 +17,11 @@ namespace sugi {
 		void show(leda::GraphWin&);
 
 	private:
-		leda::graph m_graph;
-		leda::node_array<leda::point> m_positions;
-
 		void mapPositions(const leda::graph&, const leda::node_map<leda::point>&);
+		
+	private:
+		leda::graph m_graph; // independent copy from graph passed to 'takeSnapshot'
+		leda::node_array<leda::point> m_positions; // independent static copy from nodes passed to 'takeSnapshot'
 		
 	};
 

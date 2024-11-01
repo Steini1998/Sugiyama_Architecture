@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>976</x>
+      <y>0</y>
+      <w>272</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+LEDA</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1168</x>
+      <y>368</y>
+      <w>240</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>positionable_graph
+--
+- m_graph : graph
+- m_positions :  node_array&lt;point&gt;
+--
++ takeSnapshot(graph, node_map&lt;point&gt;)
++ show(GraphWin)
+
+- mapPositions(graph, node_map)
+--
+Takes an independent copy of the graph and 
+positions by calling 'takeSnapshot()', which
+can be displayed in a graph-window by calling
+'show()'.
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1136</x>
+      <y>640</y>
+      <w>248</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+step
+--
+# m_sugiyama : sugiyama
+# m_positionable_graph : positionable_graph
+--
++ setSugiyama(sugiyama)
+
++ execute()
+
++ showResult()
+
+/- run()/
+- saveResult()
+--
+Concrete steps need to implement method
+'run()', which defines how to update the graph.
+Afterwards the step automatically saves an
+independent copy of the graph, which can be
+displayed.
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>696</x>
+      <y>600</y>
+      <w>264</w>
+      <h>344</h>
+    </coordinates>
+    <panel_attributes>sugiyama
+--
+- m_graphwin : GraphWin
+- m_graph : graph
+- m_positions : node_map&lt;point&gt;
+
+- m_graph_update_tracker : graph_update_tracker
+
+- m_steps : list&lt;step&gt;
+
+- m_step_viewer : step_viewer
+--
++ getGraphWin() : GraphWin
++ getGraph() : graph
++ getPositions() : node_map&lt;point&gt;
++ getGraphUpdateTracker() : graph_update_tracker
+
++ setStepViewer(step_viewer)
+
++ add(step)
++ remove(step)
+
++ executeAllSteps()
+
++ viewAllSteps()
+--
+Configures the whole sugiyama algorithm,
+executes all steps and shows the results.
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1264</x>
+      <y>528</y>
+      <w>48</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..1
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;140.0;20.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>952</x>
+      <y>656</y>
+      <w>200</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..1
+group=group-0</panel_attributes>
+    <additional_attributes>230.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1008</x>
+      <y>1040</y>
+      <w>240</w>
+      <h>224</h>
+    </coordinates>
+    <panel_attributes>step_viewer
+--
+- m_steps : list&lt;step&gt;
+- m_current_step_item : list_item
+- m_step_user_interface : step_user_interface
+--
++ setSteps(list&lt;step&gt;)
++ setStepUserInterface(step_user_interface)
+
++ view()
+
+- showCurrentStepsResult()
+- moveStepBackward()
+- moveStepForward()
+--
+Iterates over the steps while the
+user can decide the speed over a
+provided user interface.
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>928</x>
+      <y>936</y>
+      <w>144</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..1
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>952</x>
+      <y>720</y>
+      <w>200</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..n
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;10.0;230.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1088</x>
+      <y>872</y>
+      <w>104</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..n
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;210.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1360</x>
+      <y>1120</y>
+      <w>184</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+step_user_interface
+--
+--
+/+ nextStep() : int/
+--
+Decides the movement of the 
+step-viewer based on the 
+returned integer
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1240</x>
+      <y>1136</y>
+      <w>136</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..n
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>640</x>
+      <y>344</y>
+      <w>944</w>
+      <h>976</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+Sugiyama
+layer=-1
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1104</x>
+      <y>152</y>
+      <w>24</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>696</x>
+      <y>1072</y>
+      <w>184</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>graph_update_tracker
+--
+- m_added_nodes : list&lt;node&gt;
+- m_removed_nodes : list&lt;node&gt;
+
+- m_added_edges : list&lt;edge&gt;
+- m_removed_edges : list&lt;edge&gt;
+- m_reversed_edges : list&lt;edge&gt;
+group=group-0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>936</y>
+      <w>40</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..1
+group=group-0</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>768</x>
+      <y>1480</y>
+      <w>160</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+steps</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1192</x>
+      <y>1472</y>
+      <w>160</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+user_interfaces</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1272</x>
+      <y>1312</y>
+      <w>24</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>848</x>
+      <y>1312</y>
+      <w>24</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1024</x>
+      <y>1640</y>
+      <w>80</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>Client</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1072</x>
+      <y>1312</y>
+      <w>24</w>
+      <h>344</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;410.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1096</x>
+      <y>1512</y>
+      <w>208</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>240.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>856</x>
+      <y>1520</y>
+      <w>224</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;260.0;150.0</additional_attributes>
+  </element>
+</diagram>

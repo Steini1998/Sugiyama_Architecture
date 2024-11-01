@@ -1,6 +1,8 @@
 #include <SUGIPROJ/positionable_graph.h>
 
+
 using namespace sugi;
+
 
 void positionable_graph::takeSnapshot(const leda::graph& g, const leda::node_map<leda::point>& pos) {
 	m_graph = g;  // create copy from graph

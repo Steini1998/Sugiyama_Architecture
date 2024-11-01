@@ -1,7 +1,7 @@
 #pragma once
 
-#include "SUGIPROJ/steps/step.h"
-#include "SUGIPROJ/views/ui.h"
+#include "SUGIPROJ/step.h"
+#include "SUGIPROJ/step_user_interface.h"
 
 namespace sugi {
     
@@ -12,7 +12,7 @@ namespace sugi {
         void view();
 
         void setSteps(const leda::list<step*>&);
-        void setUserInterface(ui*);
+        void setStepUserInterface(step_user_interface*);
 
     private:
 		void showCurrentStepsResult();
@@ -24,7 +24,7 @@ namespace sugi {
         leda::list<step*> m_steps;
         leda::list_item m_current_step_item;
 
-        ui* m_user_interface;
+        step_user_interface* m_step_user_interface;
 
     };
 

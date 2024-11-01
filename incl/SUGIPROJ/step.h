@@ -9,25 +9,25 @@
 namespace sugi {
 
 	class sugiyama; // Forward declaration
-	
+	 
 	class step {		
 	public:
 
-		void setSugiyama(sugiyama*);
-
-		void make(); // Template method
+		void execute(); // Template method
 
 		void showResult();
 
-	protected:
-		sugiyama* m_sugiyama;
+		void setSugiyama(sugiyama*);
 
-		positionable_graph m_position_graph;
-		
 	private:
 		virtual void run() = 0;
 
 		void saveResult();
+
+	protected:
+		sugiyama* m_sugiyama;
+
+		positionable_graph m_positionable_graph;
 		
 	};
 	

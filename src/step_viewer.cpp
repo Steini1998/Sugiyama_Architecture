@@ -1,4 +1,5 @@
-#include "SUGIPROJ/views/step_viewer.h"
+#include "SUGIPROJ/step_viewer.h"
+
 
 using namespace sugi;
 
@@ -8,7 +9,7 @@ void step_viewer::view() {
     bool still_active = true;
     
     while (still_active) {
-        switch (m_user_interface->get()) {
+        switch (m_step_user_interface->nextStep()) {
             case 0:
                 still_active = false;
                 break;
@@ -27,8 +28,8 @@ void step_viewer::setSteps(const leda::list<step*>& all_steps) {
     m_steps = all_steps;
 }
 
-void step_viewer::setUserInterface(ui* user_interface) {
-    m_user_interface = user_interface;
+void step_viewer::setStepUserInterface(step_user_interface* step_user_interface) {
+    m_step_user_interface = step_user_interface;
 }
 
 void step_viewer::showCurrentStepsResult() {

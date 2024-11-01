@@ -2,20 +2,21 @@
 
 using namespace sugi;
 
-void step::setSugiyama(sugiyama* sg) {
-    m_sugiyama = sg;
-} 
 
-void step::make() {
+void step::execute() {
     run();
     saveResult();
 }
 
-void step::saveResult() {
-    m_position_graph = positionable_graph{};
-    m_position_graph.takeSnapshot(m_sugiyama->getGraph(), m_sugiyama->getPositions());
+void step::showResult() {
+    m_positionable_graph.show(m_sugiyama->getGraphWin());
 }
 
-void step::showResult() {
-    m_position_graph.show(m_sugiyama->getGraphWin());
+void step::setSugiyama(sugiyama* sg) {
+    m_sugiyama = sg;
+} 
+
+void step::saveResult() {
+    m_positionable_graph = positionable_graph{};
+    m_positionable_graph.takeSnapshot(m_sugiyama->getGraph(), m_sugiyama->getPositions());
 }

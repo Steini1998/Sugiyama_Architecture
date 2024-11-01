@@ -3,9 +3,13 @@
 #include "LEDA/graphics/graphwin.h"
 #include "LEDA/core/list.h"
 
-#include "SUGIPROJ/steps/step.h"
-#include "SUGIPROJ/views/step_viewer.h"
-#include "SUGIPROJ/views/ui.h"
+#include "SUGIPROJ/step.h"
+
+#include "SUGIPROJ/graph_update_tracker.h"
+
+#include "SUGIPROJ/step_viewer.h"
+
+#include "SUGIPROJ/step_user_interface.h"
 
 namespace sugi {
 	
@@ -16,13 +20,15 @@ namespace sugi {
 		void add(step*);
 		void remove(step*);
 
-		void process(); // run all steps sequential
-		void show(); // iterate over intermediate solutions
+		void executeAllSteps(); // run all steps sequential
+		void viewAllSteps(); // iterate over intermediate solutions
 
 		leda::GraphWin& getGraphWin();
 		
 		leda::graph& getGraph();
 		leda::node_map<leda::point>& getPositions();
+
+		graph_update_tracker& getGraphUpdateTracker();
 
 		void setStepViewer(const step_viewer&);
 
@@ -32,6 +38,9 @@ namespace sugi {
 		/* Same graph and positions will be processed by steps. */
 		leda::graph& m_graph;
 		leda::node_map<leda::point> m_positions;
+		
+		/* Lists, that keep track of the changed graph (e.g. edges and nodes) for all steps to access */
+		graph_update_tracker m_graph_update_tracker;
 
 		leda::list<step*> m_steps;
 		step_viewer m_step_viewer;

@@ -20,13 +20,13 @@ void sugiyama::remove(step* s) {
 	m_steps.remove(s);
 }
 
-void sugiyama::process() {
+void sugiyama::executeAllSteps() {
 	for (step* s : m_steps) {
-		s->make();
+		s->execute();
 	}
 }
 
-void sugiyama::show() {	
+void sugiyama::viewAllSteps() {	
 	m_step_viewer.setSteps(m_steps);
 	m_step_viewer.view();
 }
@@ -41,6 +41,10 @@ leda::graph& sugiyama::getGraph() {
 
 leda::node_map<leda::point>& sugiyama::getPositions() {
     return m_positions;
+}
+
+graph_update_tracker& sugiyama::getGraphUpdateTracker() {
+	return m_graph_update_tracker;
 }
 
 void sugiyama::setStepViewer(const step_viewer& sv) {
