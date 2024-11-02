@@ -6,7 +6,7 @@ using namespace sugi;
 
 
 sugiyama::sugiyama(leda::GraphWin& gw) 
-	: m_graphwin{gw}, m_graph{gw.get_graph()} {
+	: m_graphwin{gw}, m_graph{gw.get_graph()}, m_graph_update_tracker{} {
 		m_positions = leda::node_map<leda::point>{m_graph};
 		m_graphwin.get_position(m_positions);
 }

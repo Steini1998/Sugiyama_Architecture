@@ -8,25 +8,25 @@ namespace sugi {
 
 	class graph_update_tracker {
 	public:
-		graph_update_tracker() = default;
+		graph_update_tracker();
 		
-		leda::list<leda::node> getAddedNodes();
+		leda::list<leda::node>& getAddedNodes();
 		void addAddedNode(leda::node);
 		void removeAddedNode(leda::node);
 		
-		leda::list<leda::node> getRemovedNodes();
+		leda::list<leda::node>& getRemovedNodes();
 		void addRemovedNode(leda::node);
 		void removeRemovedNode(leda::node);
 		
-		leda::list<leda::edge> getAddedEdges();
+		leda::list<leda::edge>& getAddedEdges();
 		void addAddedEdge(leda::edge);
 		void removeAddedEdge(leda::edge);
 		
-		leda::list<leda::edge> getRemovedEdges();
+		leda::list<leda::edge>& getRemovedEdges();
 		void addRemovedEdge(leda::edge);
 		void removeRemovedEdge(leda::edge);
 		
-		leda::list<leda::edge> getReveresedEdges();
+		leda::list<leda::edge>& getReversedEdges();
 		void addReversedEdge(leda::edge);
 		void removeReversedEdge(leda::edge);
 

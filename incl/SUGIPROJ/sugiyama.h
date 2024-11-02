@@ -11,6 +11,7 @@
 
 #include "SUGIPROJ/step_user_interface.h"
 
+
 namespace sugi {
 	
 	class sugiyama {
