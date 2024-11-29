@@ -1,27 +1,36 @@
+# Compiler and Linker, with Options (e.g. for "COMPILER.cpp")
 CXX := cl
-CXXFLAGS := -nologo -W3 -c -Zm300 -TP -EHsc -Ox -MT
+CXXFLAGS := -nologo -W3 -Zm300 -TP -EHsc -Ox -MT
 
+LDFLAGS = -LIBPATH:$(LEDA_LIBRARY_DIR)
+
+# Project-Directory-Structure
 INCLUDE_DIR := incl
 SOURCE_DIR := src
 INTERMEDIATE_DIR := intermediates
 BINARY_DIR := bin
 
+# Relevant Source-Files
 SOURCE_FILE_NAMES := sugiyama.cpp positionable_graph.cpp step.cpp step_viewer.cpp graph_update_tracker.cpp
 
 SOURCE_FILES := $(addprefix $(SOURCE_DIR)/, $(SOURCE_FILE_NAMES))
 OBJECT_FILES := $(addprefix $(INTERMEDIATE_DIR)/, $(patsubst %.cpp, %.obj, $(SOURCE_FILE_NAMES)))
 
-LIBRARY_NAME := sugiyama
-STATIC_LIBRARY := $(BINARY_DIR)/$(LIBRARY_NAME).lib
-DYNAMIC_LIBRARY := $(BINARY_DIR)/$(LIBRARY_NAME).dll
-
+# Dependencies
 SYSTEM_LIBS := user32.lib gdi32.lib msimg32.lib comdlg32.lib shell32.lib advapi32.lib wsock32.lib
+
 LEDA_INCLUDE_DIR := ..\incl
 LEDA_LIBRARY_DIR := ..\lib
 LEDA_LIB := leda.lib
 
-LDFLAGS := -L $(LEDA_LIBRARY_DIR)
+# Libraries to create
+LIBRARY_NAME := sugiyama
+STATIC_LIBRARY := $(BINARY_DIR)/$(LIBRARY_NAME).lib
+DYNAMIC_LIBRARY := $(BINARY_DIR)/$(LIBRARY_NAME).dll
 
+
+.PHONY: all
+all: $(STATIC_LIBRARY) $(DYNAMIC_LIBRARY)
 
 # Static Library only contains this components binaries and not the system-libraries or leda-library
 .PHONY: lib
