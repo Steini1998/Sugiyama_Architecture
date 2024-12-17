@@ -1,7 +1,3 @@
-# Compiler and Linker, with Options (e.g. for "COMPILER.cpp")
-CXX := cl
-CXXFLAGS := -nologo -W3 -Zm300 -TP -EHsc -Ox -MT
-
 LDFLAGS = -LIBPATH:$(LEDA_LIBRARY_DIR)
 
 # Project-Directory-Structure
@@ -15,13 +11,6 @@ SOURCE_FILE_NAMES := sugiyama.cpp positionable_graph.cpp step.cpp step_viewer.cp
 
 SOURCE_FILES := $(addprefix $(SOURCE_DIR)/, $(SOURCE_FILE_NAMES))
 OBJECT_FILES := $(addprefix $(INTERMEDIATE_DIR)/, $(patsubst %.cpp, %.obj, $(SOURCE_FILE_NAMES)))
-
-# Dependencies
-SYSTEM_LIBS := user32.lib gdi32.lib msimg32.lib comdlg32.lib shell32.lib advapi32.lib wsock32.lib
-
-LEDA_INCLUDE_DIR := ..\incl
-LEDA_LIBRARY_DIR := ..\lib
-LEDA_LIB := leda.lib
 
 # Libraries to create
 LIBRARY_NAME := sugiyama
